@@ -1,256 +1,295 @@
 <!DOCTYPE html>
-
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>PATELKI DPC Banda Aceh</title>
+
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#11d493",
-                        "background-light": "#f6f8f7",
-                        "background-dark": "#10221c",
-                    },
-                    fontFamily: {
-                        "display": ["Inter", "sans-serif"]
-                    },
-                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-                },
-            },
-        }
-    </script>
-<title>PATELKI DPC Kota Banda Aceh</title>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head>
-<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300">
-<!-- Top Navigation Bar -->
-<nav class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+<script>
+tailwind.config = {
+darkMode: "class",
+theme: {
+extend: {
+colors: {
+primary: "#11d493",
+backgroundlight:"#f6f8f7",
+backgrounddark:"#10221c"
+},
+fontFamily:{
+display:["Inter","sans-serif"]
+}
+}
+}
+}
+</script>
+
+</head>
+
+<body class="font-display bg-backgroundlight dark:bg-backgrounddark transition-colors duration-300">
+
+<!-- NAVBAR -->
+<nav class="sticky top-0 z-50 bg-white dark:bg-backgrounddark border-b">
+
 <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+
 <div class="flex items-center gap-2">
-<div class="text-primary flex items-center justify-center">
-<span class="material-symbols-outlined text-3xl">medical_services</span>
+
+<span class="material-symbols-outlined text-primary text-3xl">medical_services</span>
+
+<h1 class="font-bold text-lg">PATELKI Banda Aceh</h1>
+
 </div>
-<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">PATELKI Banda Aceh</h2>
+
+<div class="hidden md:flex gap-6 text-sm font-semibold">
+
+<a href="Beranda.html">Home</a>
+<a href="#benefits">Benefits</a>
+<a href="#contact">Contact</a>
+
 </div>
-<div class="hidden md:flex items-center gap-8">
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Home</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Benefits</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Events</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Contact</a>
-</div>
-<div class="flex items-center gap-4">
-<button class="hidden sm:flex text-sm font-bold text-primary hover:bg-primary/10 px-4 py-2 rounded-lg transition-colors">Login</button>
-<button class="bg-primary hover:bg-primary/90 text-slate-900 text-sm font-bold px-4 py-2 rounded-lg transition-colors shadow-sm">
-                    Register Now
-                </button>
-<button class="md:hidden flex items-center justify-center text-slate-900 dark:text-slate-100">
+
+<div class="flex items-center gap-3">
+
+<button onclick="toggleDark()" class="text-sm px-3 py-1 border rounded">
+Dark
+</button>
+
+<a href="Login.html" class="text-sm font-bold text-primary">
+Login
+</a>
+
+<a href="Pendaftaran.html" class="bg-primary px-4 py-2 rounded font-bold text-black">
+Register
+</a>
+
+<button onclick="toggleMenu()" class="md:hidden">
+
 <span class="material-symbols-outlined">menu</span>
+
 </button>
+
 </div>
+
 </div>
+
+<!-- MOBILE MENU -->
+
+<div id="mobileMenu" class="hidden flex flex-col p-4 gap-3 border-t md:hidden">
+
+<a href="Beranda.html">Home</a>
+<a href="#benefits">Benefits</a>
+<a href="#contact">Contact</a>
+
+<a href="Login.html">Login</a>
+<a href="Pendaftaran.html">Register</a>
+
+</div>
+
 </nav>
-<!-- Hero Section -->
-<main>
-<div class="relative overflow-hidden">
-<div class="max-w-7xl mx-auto px-4 py-16 md:py-24 lg:py-32">
-<div class="grid lg:grid-cols-2 gap-12 items-center">
-<div class="flex flex-col gap-8">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wider uppercase w-fit">
-                            Official Organization
-                        </div>
-<h1 class="text-slate-900 dark:text-slate-100 text-5xl md:text-6xl font-black leading-tight tracking-tight">
-                            Elevate Your <span class="text-primary">Laboratory</span> Career
-                        </h1>
-<p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl leading-relaxed max-w-xl">
-                            Join the Indonesian Association of Medical Laboratory Technologists (PATELKI) DPC Kota Banda Aceh. Network with experts and advance your professional journey.
-                        </p>
-<div class="flex flex-col sm:flex-row gap-4">
-<button class="bg-primary hover:bg-primary/90 text-slate-900 text-base font-bold px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-2">
-                                Start Your Registration
-                                <span class="material-symbols-outlined">arrow_forward</span>
-</button>
-<button class="border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100 text-base font-bold px-8 py-4 rounded-xl transition-all flex items-center justify-center gap-2">
-                                Learn More
-                            </button>
-</div>
-<div class="flex items-center gap-4 pt-4">
-<div class="flex -space-x-3">
-<div class="w-10 h-10 rounded-full border-2 border-background-light bg-slate-200" data-alt="Profile photo of a medical professional"></div>
-<div class="w-10 h-10 rounded-full border-2 border-background-light bg-slate-300" data-alt="Profile photo of a scientist"></div>
-<div class="w-10 h-10 rounded-full border-2 border-background-light bg-slate-400" data-alt="Profile photo of a lab technician"></div>
-</div>
-<p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Joined by 500+ professionals in Banda Aceh</p>
-</div>
-</div>
-<div class="relative">
-<div class="aspect-square rounded-3xl overflow-hidden shadow-2xl bg-slate-200 relative z-10" data-alt="Modern medical laboratory with high-tech equipment" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCMDQhK73Tsn72Z6DfudwTRoLR-2k1Gj1sbwCDwWk4uX-_v4IMiK0RMO0Baa8E4uHQpRF-uvanqMUc2xPN-kT6AfTDCZzuf-6tPpgeUv2fFADJ_N9SBWpF-6FlpNJ-P3jjpx2fJEzzsiJfBVXgdL7c16rGNfOjZ104rJlC7XcJCFpXozPCzL1Dib2cTv3h38zmQ7wTO6aZLIXjaWH9X9LuYq1sX7VRHt_8cgxydK-GJBAaUMHJdfpMcI5LM61_tCfKqATb-G2W3QoLA'); background-size: cover; background-position: center;">
-</div>
-<div class="absolute -bottom-6 -left-6 w-32 h-32 bg-primary/20 rounded-2xl blur-2xl z-0"></div>
-<div class="absolute -top-6 -right-6 w-48 h-48 bg-primary/10 rounded-full blur-3xl z-0"></div>
-</div>
-</div>
-</div>
-</div>
-<!-- Membership Benefits -->
-<section class="py-20 bg-white dark:bg-background-dark/50">
-<div class="max-w-7xl mx-auto px-4">
-<div class="text-center mb-16">
-<h2 class="text-slate-900 dark:text-slate-100 text-3xl md:text-4xl font-bold mb-4">Membership Benefits</h2>
-<p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto">
-                        We provide the tools and network you need to succeed in the ever-evolving field of medical laboratory technology.
-                    </p>
-</div>
-<div class="grid md:grid-cols-3 gap-8">
-<!-- Benefit 1 -->
-<div class="p-8 rounded-2xl border border-slate-100 dark:border-slate-800 bg-background-light dark:bg-background-dark hover:shadow-xl hover:shadow-primary/5 transition-all">
-<div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-6">
-<span class="material-symbols-outlined">workspace_premium</span>
-</div>
-<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-3">Professional Certification</h3>
-<p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-                            Gain access to exclusive workshops and earn SKP points required for your STR renewal and professional advancement.
-                        </p>
-</div>
-<!-- Benefit 2 -->
-<div class="p-8 rounded-2xl border border-slate-100 dark:border-slate-800 bg-background-light dark:bg-background-dark hover:shadow-xl hover:shadow-primary/5 transition-all">
-<div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-6">
-<span class="material-symbols-outlined">hub</span>
-</div>
-<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-3">Expert Networking</h3>
-<p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-                            Connect with thousands of medical laboratory professionals and specialists across Aceh and beyond.
-                        </p>
-</div>
-<!-- Benefit 3 -->
-<div class="p-8 rounded-2xl border border-slate-100 dark:border-slate-800 bg-background-light dark:bg-background-dark hover:shadow-xl hover:shadow-primary/5 transition-all">
-<div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-6">
-<span class="material-symbols-outlined">gavel</span>
-</div>
-<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-3">Legal Advocacy</h3>
-<p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-                            Receive dedicated legal support, professional ethics guidance, and protection for your laboratory practice.
-                        </p>
-</div>
-</div>
-</div>
-</section>
-<!-- Call to Action -->
+
+<!-- HERO -->
+
 <section class="py-20">
-<div class="max-w-5xl mx-auto px-4">
-<div class="bg-primary rounded-[2.5rem] p-8 md:p-16 text-center relative overflow-hidden shadow-2xl shadow-primary/20">
-<!-- Decorative element -->
-<div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
-<div class="absolute bottom-0 left-0 w-48 h-48 bg-black/5 rounded-full -ml-24 -mb-24"></div>
-<div class="relative z-10">
-<h2 class="text-slate-900 text-3xl md:text-5xl font-black mb-6">Ready to Join Us?</h2>
-<p class="text-slate-900/80 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
-                            The registration process is simple and takes only a few minutes. Secure your future as a medical professional today.
-                        </p>
-<div class="flex flex-wrap justify-center gap-4">
-<button class="bg-slate-900 text-white hover:bg-slate-800 text-base font-bold px-10 py-4 rounded-xl transition-all shadow-xl">
-                                Start Registration Now
-                            </button>
-<button class="bg-white/20 hover:bg-white/30 text-slate-900 border border-slate-900/10 text-base font-bold px-10 py-4 rounded-xl transition-all">
-                                Contact Helpdesk
-                            </button>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Location/Map Section Placeholder -->
-<section class="pb-20">
-<div class="max-w-7xl mx-auto px-4">
-<div class="grid md:grid-cols-2 gap-12 items-center rounded-3xl bg-slate-50 dark:bg-background-dark/30 p-8">
-<div class="flex flex-col gap-6">
-<h2 class="text-slate-900 dark:text-slate-100 text-3xl font-bold">Our Secretariat</h2>
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-primary">location_on</span>
-<p class="text-slate-600 dark:text-slate-400">Jl. Healthcare Avenue No. 45,<br/>Baiturrahman, Banda Aceh, 23242</p>
-</div>
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-primary">mail</span>
-<p class="text-slate-600 dark:text-slate-400">sekretariat@patelki-bandaaceh.org</p>
-</div>
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-primary">call</span>
-<p class="text-slate-600 dark:text-slate-400">+62 651 123 4567</p>
-</div>
-</div>
-<div class="h-64 rounded-2xl bg-slate-200 dark:bg-slate-800 overflow-hidden relative border border-slate-200 dark:border-slate-700" data-alt="Map showing the location of PATELKI Banda Aceh office" data-location="Banda Aceh" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDVOXEWxeyjK6KspCfc26c2YlzQrK8qb0zXlj_6c8CZRDcwA6_VhA4LTOXtafTKK2u9KzfUF_C_ge1qsOVGZZ1IZipPisgprTfJJv2WBOAa4qzvH0bS1p7k_M5kto0rSDh2CcKeBlkbYHpJjCoNQ3o71g8yBDf-JOpqAsiwncAsLYET8n8yWuWC2hGEi8Wuos8_qTXtT3IDq4EflOkatvZxlh3qjiodUdrKjmaiUMiZ5AAWzWgs-Zq1_FUPXImaIkrScdQ5JEoy5V3K'); background-size: cover;">
-<!-- Simulated Map UI -->
-<div class="absolute inset-0 flex items-center justify-center">
-<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center animate-pulse">
-<div class="w-4 h-4 rounded-full bg-primary"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="bg-slate-900 text-slate-400 py-16">
-<div class="max-w-7xl mx-auto px-4">
-<div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-12">
-<div class="col-span-2 md:col-span-1">
-<div class="flex items-center gap-2 mb-6 text-white">
-<span class="material-symbols-outlined text-3xl text-primary">medical_services</span>
-<span class="text-xl font-bold">PATELKI</span>
-</div>
-<p class="text-sm leading-relaxed mb-6">
-                        The leading professional organization for Medical Laboratory Technology Experts in the Banda Aceh region.
-                    </p>
+
+<div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+
+<div>
+
+<h1 class="text-5xl font-black mb-6">
+
+Elevate Your <span class="text-primary">Laboratory</span> Career
+
+</h1>
+
+<p class="text-gray-600 mb-6">
+
+Join the Indonesian Association of Medical Laboratory Technologists (PATELKI) Banda Aceh.
+
+</p>
+
 <div class="flex gap-4">
-<a class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary transition-colors text-white" href="#">
-<span class="material-symbols-outlined text-sm">public</span>
+
+<a href="Pendaftaran.html" class="bg-primary px-6 py-3 rounded-xl font-bold">
+
+Start Registration
+
 </a>
-<a class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary transition-colors text-white" href="#">
-<span class="material-symbols-outlined text-sm">share</span>
+
+<a href="#benefits" class="border px-6 py-3 rounded-xl font-bold">
+
+Learn More
+
 </a>
+
 </div>
+
 </div>
+
 <div>
-<h4 class="text-white font-bold mb-6">Organization</h4>
-<ul class="flex flex-col gap-4 text-sm">
-<li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Vision &amp; Mission</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Board of Directors</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Regional Map</a></li>
-</ul>
+
+<img
+class="rounded-3xl shadow-xl"
+src="https://images.unsplash.com/photo-1581091870627-3f6c1d8f98d0"
+>
+
 </div>
-<div>
-<h4 class="text-white font-bold mb-6">Members</h4>
-<ul class="flex flex-col gap-4 text-sm">
-<li><a class="hover:text-primary transition-colors" href="#">Registration Guide</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Member Directory</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">SKP Points</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Ethics Code</a></li>
-</ul>
+
 </div>
-<div>
-<h4 class="text-white font-bold mb-6">Support</h4>
-<ul class="flex flex-col gap-4 text-sm">
-<li><a class="hover:text-primary transition-colors" href="#">Contact Support</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
-<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
-</ul>
+
+</section>
+
+<!-- BENEFITS -->
+
+<section id="benefits" class="py-20 bg-gray-50">
+
+<div class="max-w-7xl mx-auto px-4">
+
+<h2 class="text-3xl font-bold text-center mb-12">
+
+Membership Benefits
+
+</h2>
+
+<div class="grid md:grid-cols-3 gap-8">
+
+<div class="p-6 bg-white rounded-xl shadow">
+
+<h3 class="font-bold text-xl mb-3">
+
+Professional Certification
+
+</h3>
+
+<p>
+
+Earn SKP points for STR renewal.
+
+</p>
+
 </div>
+
+<div class="p-6 bg-white rounded-xl shadow">
+
+<h3 class="font-bold text-xl mb-3">
+
+Expert Networking
+
+</h3>
+
+<p>
+
+Connect with professionals across Aceh.
+
+</p>
+
 </div>
-<div class="pt-8 border-t border-slate-800 text-center text-xs">
-<p>© 2024 PATELKI DPC Kota Banda Aceh. All rights reserved. Professionalism in Laboratory Science.</p>
+
+<div class="p-6 bg-white rounded-xl shadow">
+
+<h3 class="font-bold text-xl mb-3">
+
+Legal Advocacy
+
+</h3>
+
+<p>
+
+Professional legal protection.
+
+</p>
+
 </div>
+
 </div>
+
+</div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="py-20 text-center">
+
+<h2 class="text-4xl font-bold mb-6">
+
+Ready to Join PATELKI?
+
+</h2>
+
+<a href="Pendaftaran.html"
+class="bg-primary px-8 py-4 rounded-xl font-bold">
+
+Register Now
+
+</a>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact" class="py-20 bg-gray-100">
+
+<div class="max-w-5xl mx-auto text-center">
+
+<h2 class="text-3xl font-bold mb-4">
+
+Secretariat
+
+</h2>
+
+<p>
+
+Jl. Healthcare Avenue No.45  
+Banda Aceh
+
+</p>
+
+<p class="mt-2">
+
+sekretariat@patelki-bandaaceh.org
+
+</p>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="bg-black text-white text-center py-10">
+
+<p>
+
+© 2024 PATELKI Banda Aceh
+
+</p>
+
 </footer>
-</body></html>
+
+<script>
+
+function toggleMenu(){
+
+const menu = document.getElementById("mobileMenu")
+
+menu.classList.toggle("hidden")
+
+}
+
+function toggleDark(){
+
+document.documentElement.classList.toggle("dark")
+
+}
+
+</script>
+
+</body>
+
+</html>
