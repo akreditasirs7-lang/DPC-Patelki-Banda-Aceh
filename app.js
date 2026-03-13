@@ -4,6 +4,8 @@ const preview = document.getElementById("previewFoto")
 
 const fotoInput = document.getElementById("foto")
 
+// preview foto
+
 fotoInput.addEventListener("change",function(){
 
 const file = this.files[0]
@@ -18,7 +20,9 @@ preview.classList.remove("hidden")
 
 })
 
-form.addEventListener("submit",async function(e){
+// submit form
+
+form.addEventListener("submit",function(e){
 
 e.preventDefault()
 
@@ -40,28 +44,20 @@ email:document.getElementById("email").value
 
 }
 
-if(!data.nama || !data.email){
+// ambil data lama
 
-alert("Nama dan Email wajib diisi")
+let database = JSON.parse(localStorage.getItem("pendaftar")) || []
 
-return
+// tambah data baru
 
-}
+database.push(data)
 
-console.log("DATA PENDAFTARAN",data)
+// simpan
 
-alert("Data berhasil dikirim")
+localStorage.setItem("pendaftar",JSON.stringify(database))
 
-// nanti ini bisa kirim ke backend API
+alert("Pendaftaran berhasil")
 
-/*
-await fetch("API_URL",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify(data)
-})
-*/
+form.reset()
 
 })
