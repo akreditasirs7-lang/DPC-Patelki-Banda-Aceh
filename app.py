@@ -12,7 +12,6 @@ creds = Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
     scopes=scope
 )
-st.write("EMAIL:", creds.service_account_email)
 client = gspread.authorize(creds)
 
 # ===== OPEN GOOGLE SHEET =====
