@@ -29,7 +29,14 @@ with st.form("form_input"):
     no_kta = st.text_input("No KTA")
     status = st.selectbox("Status Pekerjaan", ["", "PNS", "P3K", "Kontrak", "Bhakti", "Tidak Bekerja"])
     instansi = st.text_input("Instansi")
-    gaji = st.text_input("Gaji")
+gaji_map = {
+    "Rp 1.000.000 - 4.000.000": "1000000-4000000",
+    "Rp 4.000.000 - 6.000.000": "4000000-6000000",
+    "> Rp 6.000.000": "6000000+"
+}
+
+label = st.selectbox("Gaji", [""] + list(gaji_map.keys()))
+gaji = gaji_map.get(label, "")
     kelamin = st.selectbox("Jenis Kelamin", ["Laki-laki", "Perempuan"])
     phone = st.text_input("Phone")
     email = st.text_input("Email")
