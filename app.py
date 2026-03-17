@@ -18,7 +18,7 @@ client = gspread.authorize(creds)
 
 # ===== OPEN GOOGLE SHEET =====
 SHEET_ID = "1FSBFgihi7edyLmV66XoD7bnoFyL-tkZ1mBdVm5x26jA"
-sheet = client.open_by_key(SHEET_ID).sheet1
+sheet = client.open_by_key(SHEET_ID).Sheet1
 
 # ===== UI =====
 st.title("📊 Dashboard Data Staff")
