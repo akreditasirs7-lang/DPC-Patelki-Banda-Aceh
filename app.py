@@ -2,7 +2,7 @@ import streamlit as st
 import gspread
 import pandas as pd
 from google.oauth2.service_account import Credentials
-
+st.write("EMAIL:", creds.service_account_email)
 # ===== AUTH GOOGLE SHEETS (PAKAI SECRETS) =====
 scope = [
     "https://www.googleapis.com/auth/spreadsheets",
