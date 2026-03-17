@@ -2,7 +2,8 @@ import streamlit as st
 import gspread
 import pandas as pd
 from google.oauth2.service_account import Credentials
-# ===== AUTH GOOGLE SHEETS (PAKAI SECRETS) =====
+
+# ===== AUTH GOOGLE SHEETS =====
 scope = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive"
@@ -12,10 +13,11 @@ creds = Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
     scopes=scope
 )
+
 client = gspread.authorize(creds)
 
 # ===== OPEN GOOGLE SHEET =====
-SHEET_ID = "1FSBFgihi7edyLmV66XoD7bnoFyL-tkZ1mBdVm5x26jA" 
+SHEET_ID = "1FSBFgihi7edyLmV66XoD7bnoFyL-tkZ1mBdVm5x26jA"
 sheet = client.open_by_key(SHEET_ID).worksheet("Sheet1")
 
 # ===== UI =====
@@ -27,16 +29,24 @@ with st.form("form_input"):
     nama = st.text_input("Nama")
     nomor_str = st.text_input("Nomor STR")
     no_kta = st.text_input("No KTA")
-    status = st.selectbox("Status Pekerjaan", ["", "PNS", "P3K", "Kontrak", "Bhakti", "Tidak Bekerja"])
-    instansi = st.text_input("Instansi")
-gaji_map = {
-    "Rp 1.000.000 - 4.000.000": "1000000-4000000",
-    "Rp 4.000.000 - 6.000.000": "4000000-6000000",
-    "> Rp 6.000.000": "6000000+"
-}
 
-label = st.selectbox("Gaji", [""] + list(gaji_map.keys()))
-gaji = gaji_map.get(label, "")
+    status = st.selectbox(
+        "Status Pekerjaan",
+        ["", "PNS", "P3K", "Kontrak", "Bhakti", "Tidak Bekerja"]
+    )
+
+    instansi = st.text_input("Instansi")
+
+    # ===== GAJI =====
+    gaji_map = {
+        "Rp 1.000.000 - 4.000.000": "1000000-4000000",
+        "Rp 4.000.000 - 6.000.000": "4000000-6000000",
+        "> Rp 6.000.000": "6000000+"
+    }
+
+    label = st.selectbox("Gaji", [""] + list(gaji_map.keys()))
+    gaji = gaji_map.get(label, "")
+
     kelamin = st.selectbox("Jenis Kelamin", ["Laki-laki", "Perempuan"])
     phone = st.text_input("Phone")
     email = st.text_input("Email")
@@ -54,9 +64,9 @@ if submit:
         data = sheet.get_all_records()
         df = pd.DataFrame(data)
 
-        if not df.empty and no_kta in df["No KTA"].values:
+        if not df.empty and "No KTA" in df.columns and no_kta in df["No KTA"].values:
 
-            # UPDATE DATA
+            # UPDATE
             row_index = df[df["No KTA"] == no_kta].index[0] + 2
 
             sheet.update(f"A{row_index}:J{row_index}", [[
@@ -76,7 +86,7 @@ if submit:
 
         else:
 
-            # INSERT DATA
+            # INSERT
             sheet.append_row([
                 nama,
                 nomor_str,
@@ -103,6 +113,6 @@ if df.empty:
 else:
     st.dataframe(df, use_container_width=True)
 
-# ===== REFRESH BUTTON =====
+# ===== REFRESH =====
 if st.button("🔄 Refresh Data"):
     st.rerun()
