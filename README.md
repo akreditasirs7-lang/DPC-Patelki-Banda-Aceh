@@ -1,1 +1,0 @@
-# DPC-Patelki-Banda-Aceh
