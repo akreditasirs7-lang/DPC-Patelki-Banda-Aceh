@@ -32,7 +32,8 @@ def load_data():
                     df[col] = ""
         return df.dropna(how="all") # Hapus baris yang kosong semua
     except Exception as e:
-        # Jika worksheet belum ada atau kosong, kembalikan dataframe kosong
+        # Tampilkan error asli agar mudah di-debug
+        st.error(f"Error membaca sheet: {e}")
         return pd.DataFrame(columns=["ID", "Nama", "Lunas_Tahun", "Tidak_Lunas_Tahun"])
 
 # --- SISTEM LOGIN ADMIN ---
