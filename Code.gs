@@ -1,7 +1,7 @@
 // =============================================
 // GANTI DENGAN ID GOOGLE SHEETS KAMU
 // =============================================
-var SPREADSHEET_ID = 'GANTI_DENGAN_ID_SPREADSHEET_KAMU';
+var SPREADSHEET_ID = 'spreadsheets/d/1MP1p7nfNhNxt7kx-nLzAipyORydIijTUzemM2779DXo';
 var SHEET_ANGGOTA  = 'Data Anggota';
 var SHEET_IURAN    = 'Data Iuran';
 
