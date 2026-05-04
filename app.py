@@ -20,7 +20,7 @@ except Exception as e:
 def load_data():
     try:
         # Mengambil data dari worksheet pertama (pastikan Google Sheet tidak kosong)
-        df = conn.read(worksheet="Sheet1", usecols=[0, 1, 2, 3]) 
+        df = conn.read(worksheet="Data Iuran", usecols=[0, 1, 2, 3]) 
         # Coba paksa tipe data jika kosong
         if df.empty:
             df = pd.DataFrame(columns=["ID", "Nama", "Lunas_Tahun", "Tidak_Lunas_Tahun"])
@@ -218,7 +218,7 @@ elif menu == "Panel Admin":
                     
                     # Update ke Google Sheets
                     try:
-                        conn.update(worksheet="Sheet1", data=updated_df)
+                        conn.update(worksheet="Data Iuran", data=updated_df)
                         st.cache_data.clear() # Bersihkan cache agar data terbaru langsung termuat
                         st.success(f"Data {nama_baru} berhasil ditambahkan!")
                         st.rerun()
@@ -263,7 +263,7 @@ elif menu == "Panel Admin":
                             
                             # Simpan ke Google Sheets
                             try:
-                                conn.update(worksheet="Sheet1", data=df)
+                                conn.update(worksheet="Data Iuran", data=df)
                                 st.cache_data.clear()
                                 st.success("Data berhasil diupdate!")
                                 st.rerun()
@@ -289,7 +289,7 @@ elif menu == "Panel Admin":
                     
                     # Simpan ulang ke Google Sheets
                     try:
-                        conn.update(worksheet="Sheet1", data=df)
+                        conn.update(worksheet="Data Iuran", data=df)
                         st.cache_data.clear()
                         st.success("Data berhasil dihapus!")
                         st.rerun()
