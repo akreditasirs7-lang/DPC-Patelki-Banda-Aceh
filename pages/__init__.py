@@ -1,1 +1,1 @@
-# utils package
+# pages package
