@@ -17,15 +17,18 @@ inject_css()
 st.markdown("""
 <style>
 .stApp {
-    background: #050d1a !important;
-}
-.stApp > div:first-child {
     background: transparent !important;
 }
 [data-testid="stAppViewContainer"] {
-    background: #050d1a !important;
+    background: transparent !important;
 }
-[data-testid="stAppViewBlockContainer"] {
+[data-testid="stMain"] {
+    background: transparent !important;
+}
+[data-testid="stHeader"] {
+    background: transparent !important;
+}
+section[data-testid="stMainBlockContainer"] {
     background: transparent !important;
 }
 </style>
