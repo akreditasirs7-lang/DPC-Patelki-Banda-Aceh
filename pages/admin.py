@@ -16,13 +16,11 @@ st.set_page_config(
 
 inject_css()
 
-# ── CEK LOGIN ───────────────────────────────────────────────
 if not check_password():
     st.markdown(header_html(show_admin_btn=False, is_admin=False), unsafe_allow_html=True)
     login_form()
     st.stop()
 
-# ── SUDAH LOGIN ─────────────────────────────────────────────
 st.markdown(header_html(show_admin_btn=False, is_admin=True), unsafe_allow_html=True)
 
 col_title, col_logout = st.columns([6, 1])
@@ -30,7 +28,6 @@ with col_logout:
     if st.button("🚪 Logout", use_container_width=True):
         logout()
 
-# ── LOAD DATA ───────────────────────────────────────────────
 @st.cache_data(ttl=30)
 def get_admin_data():
     return load_anggota(), load_iuran()
@@ -41,7 +38,6 @@ n_total = len(df_anggota)
 n_lunas = len(df_iuran[df_iuran["Status Iuran"] == "Lunas"]) if not df_iuran.empty and "Status Iuran" in df_iuran.columns else 0
 n_belum = len(df_iuran) - n_lunas
 
-# ── STAT CARDS ──────────────────────────────────────────────
 st.markdown("<div style='height:12px'></div>", unsafe_allow_html=True)
 c1, c2, c3 = st.columns(3)
 for col, lbl, val, color, sub in [
@@ -59,40 +55,35 @@ for col, lbl, val, color, sub in [
 
 st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
 
-# ── FORM SET IURAN ──────────────────────────────────────────
+# ── FORM SET IURAN ──
 st.markdown("""
-<div class="glass-panel">
-    <div class="panel-header">
-        <h3>💳 Set Status Iuran Anggota</h3>
-    </div>
+<div style='background:rgba(30,41,59,.9);border:1px solid rgba(59,130,246,.2);
+    border-radius:14px;padding:1rem 1.25rem .5rem;margin-bottom:1rem'>
+    <p style='color:#93C5FD;font-size:13px;font-weight:600;margin-bottom:1rem'>
+    💳 Set Status Iuran Anggota</p>
 </div>""", unsafe_allow_html=True)
-st.markdown("<div style='height:1px'></div>", unsafe_allow_html=True)
 
-with st.container():
-    st.markdown("""<div style='background:rgba(30,41,59,.9);border:1px solid rgba(255,255,255,.07);
-        border-radius:0 0 14px 14px;padding:1.25rem 1.25rem 1.5rem'>""", unsafe_allow_html=True)
+nama_list = df_anggota["Nama"].tolist() if not df_anggota.empty and "Nama" in df_anggota.columns else []
+kta_map = {}
+if not df_anggota.empty and "No KTA" in df_anggota.columns and "Nama" in df_anggota.columns:
+    kta_map = dict(zip(df_anggota["Nama"], df_anggota["No KTA"]))
 
-    nama_list = df_anggota["Nama"].tolist() if not df_anggota.empty else []
-    kta_map   = {}
-    if not df_anggota.empty and "No KTA" in df_anggota.columns:
-        kta_map = dict(zip(df_anggota["Nama"], df_anggota["No KTA"]))
+with st.form("form_iuran", clear_on_submit=True):
+    col1, col2, col3, col4 = st.columns([3, 1.5, 1.5, 1.5])
+    with col1:
+        pilih_nama = st.selectbox(
+            "Pilih Anggota *",
+            options=[""] + nama_list,
+            format_func=lambda x: "-- Pilih Anggota --" if x == "" else x
+        )
+    with col2:
+        thn_dari = st.number_input("Tahun Dari *", min_value=2000, max_value=2100, value=2024, step=1)
+    with col3:
+        thn_sampai = st.number_input("Tahun Sampai *", min_value=2000, max_value=2100, value=2024, step=1)
+    with col4:
+        status_iur = st.selectbox("Status *", ["Lunas", "Belum Lunas"])
 
-    with st.form("form_iuran", clear_on_submit=True):
-        col1, col2, col3, col4 = st.columns([3, 1.5, 1.5, 1.5])
-        with col1:
-            pilih_nama = st.selectbox("Pilih Anggota *",
-                options=[""] + nama_list,
-                format_func=lambda x: "-- Pilih Anggota --" if x == "" else x)
-        with col2:
-            thn_dari   = st.number_input("Tahun Dari *", min_value=2000, max_value=2100, value=2024, step=1)
-        with col3:
-            thn_sampai = st.number_input("Tahun Sampai *", min_value=2000, max_value=2100, value=2024, step=1)
-        with col4:
-            status_iur = st.selectbox("Status *", ["Lunas", "Belum Lunas"])
-
-        simpan = st.form_submit_button("💾 Simpan Status Iuran", use_container_width=True)
-
-    st.markdown("</div>", unsafe_allow_html=True)
+    simpan = st.form_submit_button("💾 Simpan Status Iuran", use_container_width=True)
 
 if simpan:
     if not pilih_nama:
@@ -109,7 +100,7 @@ if simpan:
             "status_iuran": status_iur
         })
         if ok:
-            st.success(f"✅ Status iuran **{pilih_nama}** ({thn_dari}–{thn_sampai}) berhasil disimpan sebagai **{status_iur}**!")
+            st.success(f"✅ Iuran **{pilih_nama}** ({thn_dari}–{thn_sampai}) disimpan sebagai **{status_iur}**!")
             st.cache_data.clear()
             st.rerun()
         else:
@@ -117,73 +108,73 @@ if simpan:
 
 st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
 
-# ── TABS DATA ───────────────────────────────────────────────
+# ── TABS ──
 tab1, tab2 = st.tabs(["💳  Data Iuran", "👥  Data Anggota"])
 
 with tab1:
-    st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
     col_r, _ = st.columns([1, 5])
     with col_r:
         if st.button("🔄 Refresh", key="ref_iuran"):
-            st.cache_data.clear(); st.rerun()
+            st.cache_data.clear()
+            st.rerun()
 
     if df_iuran.empty:
-        st.markdown("<div style='text-align:center;padding:2rem;color:#475569'>Belum ada data iuran.</div>", unsafe_allow_html=True)
+        st.info("Belum ada data iuran.")
     else:
-        def color_iuran(val):
-            if val == "Lunas":
-                return "background:rgba(59,130,246,.15);color:#93C5FD;border-radius:5px;padding:2px 8px"
-            return "background:rgba(245,158,11,.12);color:#FCD34D;border-radius:5px;padding:2px 8px"
         st.dataframe(df_iuran, use_container_width=True, hide_index=True, height=350)
         st.caption(f"Total {len(df_iuran)} data iuran")
 
         st.markdown("---")
         st.markdown("**🗑️ Hapus Data Iuran**")
         kta_iuran_list = df_iuran["No KTA"].astype(str).tolist() if "No KTA" in df_iuran.columns else []
-        col_del1, col_del2 = st.columns([3,1])
+        col_del1, col_del2 = st.columns([3, 1])
         with col_del1:
             del_iuran = st.selectbox("Pilih No. KTA untuk dihapus", [""] + kta_iuran_list, key="del_iuran")
         with col_del2:
             st.markdown("<div style='height:28px'></div>", unsafe_allow_html=True)
-            if st.button("Hapus Iuran", use_container_width=True, type="primary"):
+            if st.button("Hapus", use_container_width=True, type="primary", key="hapus_iuran_btn"):
                 if del_iuran:
                     if hapus_iuran(del_iuran):
                         st.success(f"Data iuran No. KTA {del_iuran} dihapus.")
-                        st.cache_data.clear(); st.rerun()
+                        st.cache_data.clear()
+                        st.rerun()
 
 with tab2:
-    st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
     col_r2, _ = st.columns([1, 5])
     with col_r2:
         if st.button("🔄 Refresh", key="ref_anggota"):
-            st.cache_data.clear(); st.rerun()
+            st.cache_data.clear()
+            st.rerun()
 
     if df_anggota.empty:
-        st.markdown("<div style='text-align:center;padding:2rem;color:#475569'>Belum ada data anggota.</div>", unsafe_allow_html=True)
+        st.info("Belum ada data anggota.")
     else:
-        cols_show = ["Nama","Jenis Kelamin","No HP","Nomor STR","No KTA",
-                     "Status Pekerjaan","Instansi","Gaji","Status Keanggotaan"]
+        cols_show = ["Nama", "Jenis Kelamin", "No HP", "Nomor STR", "No KTA",
+                     "Status Pekerjaan", "Instansi", "Gaji", "Status Keanggotaan"]
         cols_show = [c for c in cols_show if c in df_anggota.columns]
-
-        def color_aktif(val):
-            if val == "Aktif":
-                return "background:rgba(16,185,129,.15);color:#6EE7B7;border-radius:5px;padding:2px 8px"
-            return "background:rgba(239,68,68,.12);color:#FCA5A5;border-radius:5px;padding:2px 8px"
-
-       st.dataframe(df_anggota[cols_show], use_container_width=True, hide_index=True, height=400)
+        st.dataframe(df_anggota[cols_show], use_container_width=True, hide_index=True, height=400)
         st.caption(f"Total {len(df_anggota)} anggota terdaftar")
 
         st.markdown("---")
         st.markdown("**🗑️ Hapus Data Anggota**")
         kta_list = df_anggota["No KTA"].astype(str).tolist() if "No KTA" in df_anggota.columns else []
-        col_da1, col_da2 = st.columns([3,1])
+
+        def fmt_kta(x):
+            if x == "":
+                return "-- Pilih --"
+            match = df_anggota[df_anggota["No KTA"].astype(str) == x]
+            nama = match["Nama"].values[0] if len(match) > 0 else ""
+            return f"{x} – {nama}"
+
+        col_da1, col_da2 = st.columns([3, 1])
         with col_da1:
-            del_anggota = st.selectbox("Pilih No. KTA anggota", [""] + kta_list, key="del_anggota",
-                format_func=lambda x: "-- Pilih --" if x == "" else f"{x} – {df_anggota[df_anggota['No KTA'].astype(str)==x]['Nama'].values[0] if x and len(df_anggota[df_anggota['No KTA'].astype(str)==x]) else ''}")
+            del_anggota = st.selectbox("Pilih No. KTA anggota", [""] + kta_list,
+                                       key="del_anggota", format_func=fmt_kta)
         with col_da2:
             st.markdown("<div style='height:28px'></div>", unsafe_allow_html=True)
-            if st.button("Hapus Anggota", use_container_width=True, type="primary"):
+            if st.button("Hapus", use_container_width=True, type="primary", key="hapus_anggota_btn"):
                 if del_anggota:
                     if hapus_anggota(del_anggota):
                         st.success(f"Anggota No. KTA {del_anggota} dihapus.")
-                        st.cache_data.clear(); st.rerun()
+                        st.cache_data.clear()
+                        st.rerun()
