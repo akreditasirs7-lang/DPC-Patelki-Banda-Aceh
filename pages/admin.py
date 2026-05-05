@@ -70,12 +70,25 @@ kta_map = {}
 if not df_anggota.empty and "No KTA" in df_anggota.columns and "Nama" in df_anggota.columns:
     kta_map = dict(zip(df_anggota["Nama"], df_anggota["No KTA"]))
 
+col_search, col_drop = st.columns([2, 2])
+with col_search:
+    search_anggota = st.text_input("🔍 Cari Nama Anggota", placeholder="Ketik nama...")
+filtered_nama = [n for n in nama_list if search_anggota.lower() in n.lower()] if search_anggota else nama_list
+with col_drop:
+    pilih_nama_pre = st.selectbox(
+        "Pilih dari hasil pencarian",
+        options=[""] + filtered_nama,
+        format_func=lambda x: "-- Pilih Anggota --" if x == "" else x,
+        key="pre_select"
+    )
+
 with st.form("form_iuran", clear_on_submit=True):
     col1, col2, col3, col4 = st.columns([3, 1.5, 1.5, 1.5])
     with col1:
         pilih_nama = st.selectbox(
-            "Pilih Anggota *",
-            options=[""] + nama_list,
+            "Konfirmasi Anggota *",
+            options=[""] + filtered_nama,
+            index=(filtered_nama.index(pilih_nama_pre) + 1) if pilih_nama_pre and pilih_nama_pre in filtered_nama else 0,
             format_func=lambda x: "-- Pilih Anggota --" if x == "" else x
         )
     with col2:
@@ -86,7 +99,6 @@ with st.form("form_iuran", clear_on_submit=True):
         status_iur = st.selectbox("Status *", ["Lunas", "Belum Lunas"])
 
     simpan = st.form_submit_button("💾 Simpan Status Iuran", use_container_width=True)
-
 if simpan:
     if not pilih_nama:
         st.error("Pilih anggota terlebih dahulu.")
