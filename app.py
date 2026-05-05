@@ -24,8 +24,8 @@ def get_data():
 df_anggota, df_iuran = get_data()
 
 n_total  = len(df_anggota)
-n_aktif  = len(df_anggota[df_anggota.get("Status Keanggotaan", pd.Series(dtype=str)) == "Aktif"]) if not df_anggota.empty else 0
-n_lunas  = len(df_iuran[df_iuran.get("Status Iuran", pd.Series(dtype=str)) == "Lunas"]) if not df_iuran.empty else 0
+n_aktif  = len(df_anggota[df_anggota["Status Keanggotaan"] == "Aktif"]) if not df_anggota.empty and "Status Keanggotaan" in df_anggota.columns else 0
+n_lunas  = len(df_iuran[df_iuran["Status Iuran"] == "Lunas"]) if not df_iuran.empty and "Status Iuran" in df_iuran.columns else 0
 
 # ── STAT CARDS ──────────────────────────────────────────────
 st.markdown("<div style='height:12px'></div>", unsafe_allow_html=True)
