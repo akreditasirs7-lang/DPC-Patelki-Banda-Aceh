@@ -109,21 +109,35 @@ def simpan_iuran(row: dict) -> bool:
         ws = _get_or_create_sheet(ss, SHEET_IURAN, HEADER_IURAN)
         from datetime import datetime
         now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        # Update jika sudah ada
-        try:
-            cell = ws.find(row["no_kta"], in_column=1)
-            if cell:
-                ws.update(f"A{cell.row}:F{cell.row}", [[
-                    row["no_kta"], row["nama"], row["tahun_dari"],
-                    row["tahun_sampai"], row["status_iuran"], now
-                ]])
-                return True
-        except Exception:
-            pass
-        ws.append_row([
-            row["no_kta"], row["nama"], row["tahun_dari"],
-            row["tahun_sampai"], row["status_iuran"], now
-        ])
+
+        # Ambil semua data
+        all_values = ws.get_all_values()
+        
+        # Cari baris yang no_kta-nya cocok (mulai baris ke-2, index 1)
+        found_row = None
+        for i, row_data in enumerate(all_values):
+            if i == 0:
+                continue  # skip header
+            if str(row_data[0]).strip() == str(row["no_kta"]).strip():
+                found_row = i + 1  # nomor baris di Sheets (1-based)
+                break
+
+        new_data = [
+            str(row["no_kta"]),
+            str(row["nama"]),
+            str(row["tahun_dari"]),
+            str(row["tahun_sampai"]),
+            str(row["status_iuran"]),
+            now
+        ]
+
+        if found_row:
+            # Update baris yang ada
+            ws.update(f"A{found_row}:F{found_row}", [new_data])
+        else:
+            # Tambah baris baru
+            ws.append_row(new_data)
+
         return True
     except Exception as e:
         st.error(f"Gagal menyimpan iuran: {e}")
