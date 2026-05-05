@@ -78,7 +78,7 @@ with tab1:
                 return "background-color: rgba(16,185,129,.15); color: #6EE7B7; border-radius:6px; padding:2px 8px"
             return "background-color: rgba(239,68,68,.12); color: #FCA5A5; border-radius:6px; padding:2px 8px"
 
-        styled = disp[cols_show].style.applymap(style_status, subset=["Status Keanggotaan"])
+        styled = disp[cols_show].map(style_status, subset=["Status Keanggotaan"])
         st.dataframe(styled, use_container_width=True, hide_index=True, height=420)
         st.caption(f"Menampilkan {len(disp)} dari {n_total} anggota")
 
@@ -105,7 +105,7 @@ with tab2:
                 return "background-color: rgba(59,130,246,.15); color: #93C5FD; border-radius:6px; padding:2px 8px"
             return "background-color: rgba(245,158,11,.12); color: #FCD34D; border-radius:6px; padding:2px 8px"
 
-        styled_i = disp_i.style.applymap(style_iuran, subset=["Status Iuran"])
+        styled_i = disp_i.map(style_iuran, subset=["Status Iuran"])
         st.dataframe(styled_i, use_container_width=True, hide_index=True, height=400)
         st.caption(f"Menampilkan {len(disp_i)} data iuran")
 
