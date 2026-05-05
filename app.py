@@ -24,7 +24,8 @@ def get_data():
 df_anggota, df_iuran = get_data()
 
 n_total  = len(df_anggota)
-n_aktif  = len(df_anggota[df_anggota["Status Keanggotaan"] == "Aktif"]) if not df_anggota.empty and "Status Keanggotaan" in df_anggota.columns else 0
+status_col_a = next((c for c in ["Status Keanggotaan","Status","status"] if c in df_anggota.columns), None)
+n_aktif = len(df_anggota[df_anggota[status_col_a] == "Aktif"]) if status_col_a else 0
 n_lunas  = len(df_iuran[df_iuran["Status Iuran"] == "Lunas"]) if not df_iuran.empty and "Status Iuran" in df_iuran.columns else 0
 
 # ── STAT CARDS ──────────────────────────────────────────────
@@ -69,9 +70,18 @@ with tab1:
         st.markdown("""<div style='text-align:center;padding:3rem;color:#475569;'>
             🔍 Tidak ada data ditemukan.</div>""", unsafe_allow_html=True)
     else:
-        cols_show = ["Nama", "No HP", "Nomor STR", "No KTA",
-                     "Status Pekerjaan", "Instansi", "Gaji", "Status Keanggotaan"]
-        cols_show = [c for c in cols_show if c in disp.columns]
+       # Deteksi nama kolom status yang dipakai
+status_col = None
+for possible in ["Status Keanggotaan", "Status", "status"]:
+    if possible in disp.columns:
+        status_col = possible
+        break
+
+cols_show = ["Nama", "No HP", "Nomor STR", "No KTA",
+             "Status Pekerjaan", "Instansi", "Gaji"]
+if status_col:
+    cols_show.append(status_col)
+cols_show = [c for c in cols_show if c in disp.columns]
 
         def style_status(val):
             if val == "Aktif":
