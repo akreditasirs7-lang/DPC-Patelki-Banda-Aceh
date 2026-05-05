@@ -13,6 +13,24 @@ st.set_page_config(
 
 inject_css()
 
+# Force transparent background untuk animasi tampil
+st.markdown("""
+<style>
+.stApp {
+    background: #050d1a !important;
+}
+.stApp > div:first-child {
+    background: transparent !important;
+}
+[data-testid="stAppViewContainer"] {
+    background: #050d1a !important;
+}
+[data-testid="stAppViewBlockContainer"] {
+    background: transparent !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
 st.markdown(header_html(show_admin_btn=True, is_admin=False), unsafe_allow_html=True)
 
 
