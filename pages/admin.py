@@ -38,7 +38,7 @@ def get_admin_data():
 df_anggota, df_iuran = get_admin_data()
 
 n_total = len(df_anggota)
-n_lunas = len(df_iuran[df_iuran.get("Status Iuran", pd.Series(dtype=str)) == "Lunas"]) if not df_iuran.empty else 0
+n_lunas = len(df_iuran[df_iuran["Status Iuran"] == "Lunas"]) if not df_iuran.empty and "Status Iuran" in df_iuran.columns else 0
 n_belum = len(df_iuran) - n_lunas
 
 # ── STAT CARDS ──────────────────────────────────────────────
