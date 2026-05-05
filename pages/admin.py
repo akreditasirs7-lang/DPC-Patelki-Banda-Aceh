@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from utils.style import inject_css, header_html
 from utils.auth import check_password, login_form, logout
 from utils.sheets import (
