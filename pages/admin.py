@@ -134,11 +134,7 @@ with tab1:
             if val == "Lunas":
                 return "background:rgba(59,130,246,.15);color:#93C5FD;border-radius:5px;padding:2px 8px"
             return "background:rgba(245,158,11,.12);color:#FCD34D;border-radius:5px;padding:2px 8px"
-
-        st.dataframe(
-            df_iuran.style.applymap(color_iuran, subset=["Status Iuran"]),
-            use_container_width=True, hide_index=True, height=350
-        )
+        st.dataframe(df_iuran, use_container_width=True, hide_index=True, height=350)
         st.caption(f"Total {len(df_iuran)} data iuran")
 
         st.markdown("---")
@@ -174,10 +170,7 @@ with tab2:
                 return "background:rgba(16,185,129,.15);color:#6EE7B7;border-radius:5px;padding:2px 8px"
             return "background:rgba(239,68,68,.12);color:#FCA5A5;border-radius:5px;padding:2px 8px"
 
-        st.dataframe(
-            df_anggota[cols_show].style.applymap(color_aktif, subset=["Status Keanggotaan"]),
-            use_container_width=True, hide_index=True, height=400
-        )
+       st.dataframe(df_anggota[cols_show], use_container_width=True, hide_index=True, height=400)
         st.caption(f"Total {len(df_anggota)} anggota terdaftar")
 
         st.markdown("---")
